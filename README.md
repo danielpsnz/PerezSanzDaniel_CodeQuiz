@@ -10,8 +10,9 @@ In this project I introduce a real-world application to JavaScript and Web APIs.
 
 The portfolio should be seen as below: 
 
-![alt text]()
-![alt text]()
+![alt text](./starter/sc1.png)
+![alt text](./starter/sc2.png)
+![alt text](./starter/sc3.png)
 
 
 ## Credits
