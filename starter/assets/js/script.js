@@ -12,7 +12,7 @@ var choice1 = document.getElementById("one");
 var choice2 = document.getElementById("two");
 var choice3 = document.getElementById("three");
 var choice4 = document.getElementById("four");
-var choice5 = document.getElementById("five");
+var answerResponse = document.getElementById("answerResponse");
 var questionButton = document.querySelector(".questionButton");
 
 var end_screen = document.getElementById("end-screen");
@@ -21,45 +21,48 @@ var submit = document.getElementById("submit");
 var initials = document.getElementById("initials"); 
 
 var feedback = document.getElementById("feedback");
+var clear = document.getElementById("clear");
+var highScoreButtons = document.getElementById("highScoreButtons");
+var highscores = document.getElementById("highscores");
 
 // QUESTIONS
 
 var quizQuestions = [
     {
-    "question-title" : "What is the capital of Finland?", 
-    "one" : "1. London",
-    "two" : "2. Madrid",
-    "three" : "3. Oslo",
-    "four" : "4. Helsinki",
-    "correct" : "Helsinki",
+    question_title : "What is the capital of Finland?", 
+    one : "London",
+    two : "Madrid",
+    three : "Oslo",
+    four : "Helsinki",
+    correct : "Helsinki",
     },{
-    "question-title" : "What's a baby rabbit called?", 
-    "one" : "1. Bunny",
-    "two" : "2. Puppy",
-    "three" : "3. Foal",
-    "four" : "4. Pup",
-    "correct" : "Bunny",
+    question_title : "What's a baby rabbit called?", 
+    one : "Bunny",
+    two : "Puppy",
+    three : "Foal",
+    four : "Pup",
+    correct : "Bunny",
     }, {
-    "question-title" : "Name one landlocked country in Europe", 
-    "one" : "1. Spain",
-    "two" : "2. Italy",
-    "three" : "3. Norway",
-    "four" : "4. Macedonia",
-    "correct" : "Macedonia",
+    question_title : "Name one landlocked country in Europe", 
+    one : "Spain",
+    two : "Italy",
+    three : "Norway",
+    four : "Macedonia",
+    correct : "Macedonia",
     }, {
-    "question-title" : "Where in England would you find the themepark Dreamland?", 
-    "one" : "1. Brighton",
-    "two" : "2. Margate",
-    "three" : "3. Edinburgh",
-    "four" : "4. London",
-    "correct" : "Margate",
+    question_title : "Where in England would you find the themepark Dreamland?", 
+    one : "Brighton",
+    two : "Margate",
+    three : "Edinburgh",
+    four : "London",
+    correct : "Margate",
     }, {
-    "question-title" : "Which London Underground line has the most stations?", 
-    "one" : "1. District Line",
-    "two" : "2. North Line",
-    "three" : "3. Central Line",
-    "four" : "4. Elizabeth Line",
-    "correct" : "District Line",
+    question_title : "Which London Underground line has the most stations?", 
+    one : "District Line",
+    two : "North Line",
+    three : "Central Line",
+    four : "Elizabeth Line",
+    correct : "District Line",
     }
   ]
 
@@ -90,8 +93,9 @@ function startQuiz() {
   secondsLeft = 90; // seconds in Timer 
   
   var timerInterval = setInterval(function() { 
+    time.innerText = secondsLeft;
     secondsLeft--;
-    time.textContent = secondsLeft;
+    
     if (secondsLeft === 0 || quizQuestions.length === questionIndex) {
       clearInterval(timerInterval);
       showFinalScore();
@@ -112,8 +116,6 @@ function showQuestions() {
   choice3.setAttribute("data-answer", quest.three);
   choice4.innerHTML = quest.four;
   choice4.setAttribute("data-answer", quest.four);
-  choice5.innerHTML = quest.five;
-  choice5.setAttribute("data-answer", quest.five);
 }
 
 // User clicks answer
@@ -128,9 +130,6 @@ choice3.addEventListener("click", function (event) {
   checkAnswer(event);
 })
 choice4.addEventListener("click", function (event) {
-  checkAnswer(event);
-})
-choice5.addEventListener("click", function (event) {
   checkAnswer(event);
 })
 
@@ -168,15 +167,9 @@ function showFinalScore() { //Function to go to page when time out or quiz compl
   finalScore.textContent = secondsLeft; // Shows Final score
 } // end of showFinalScore
 
-var highScoreArray = [] // Global variable 
+var highScoreArray = [] // Initialize variable 
 
-// SHOWS ALL HIGH SCORES 
 function showHighScores() {
-  scores.style.display = "block"; // Display scores
-  timer.style.display = "none"; // Hide timer
-  wrapper.style.display = "none" // Hide first page
-  questions.style.display = "none" // Hide questions
-  end_screen.style.display = "block" // Hide end_screen
   
   var getInitials = document.getElementById("initials").value; // captures the value of the initials 
 
@@ -188,31 +181,25 @@ function showHighScores() {
 
   var highScores = getInitials + ": " + secondsLeft; // add in + getInitials when read it
 
-  $("#highScoreList").append(highScores) // Appends high score & initials
+  document.getElementById("highscores").append(highScores) // Appends high score & initials
 }
 
 // START BUTTON
-start.addEventListener("click", function() { 
+start.addEventListener("click", () => {
   startQuiz();
-  console.log("start")
-})
+  console.log("start");
+});
 
-// CLICK TO VIEW HIGH SCORES - DOES NOT WORK 
-scores.addEventListener("click", function() {
-  showHighScores();
-  console.log("view high scores")
-})
-
-// CLICK INTIAL BUTTON TO SHOW HIGH SCORES - WORKS
+// CLICK INTIAL BUTTON TO SHOW HIGH SCORES - DOES NOT WORK
 submit.addEventListener("click", function() { 
-  showHighScores();
-  console.log("Submit")
+  showHighScores()
+  console.log("initial button")
 }) 
 
 // CLEAR HIGH SCORES - WORKS
-clearHighScore.addEventListener("click", function() {
-  localStorage.clear();
-})
+clear.addEventListener("click", () => {
+  localStorage.clear()
+});
 
 // GO BACK BUTTON EVENT liSTENER - WORKS 
 goBack.addEventListener("click", function() { // Go back to the home page
