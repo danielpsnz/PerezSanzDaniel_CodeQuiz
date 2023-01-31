@@ -10,9 +10,8 @@ In this project I introduce a real-world application to JavaScript and Web APIs.
 
 The portfolio should be seen as below: 
 
-![alt text](./assets/sc1.png)
-![alt text](./assets/sc2.png)
-![alt text](./assets/sc3.png)
+![alt text](./forecast.png)
+![alt text](./weather.png)
 
 
 ## Credits
